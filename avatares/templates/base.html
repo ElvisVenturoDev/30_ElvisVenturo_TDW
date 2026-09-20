@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block titulo %}Generador de Avatares{% endblock %}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar__inner">
+      <div class="brand-box">
+        <div class="brand-mark">A</div>
+        <div>
+          <p class="brand-label">AuraAvatar</p>
+          <span class="brand-subtitle">Generador profesional</span>
+        </div>
+      </div>
+
+      <nav class="topnav" aria-label="Navegación principal">
+        <a href="{{ url_for('avatares.index') }}">Galería</a>
+        <a href="{{ url_for('avatares.nuevo') }}">Nuevo avatar</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    {% with mensajes = get_flashed_messages(with_categories=true) %}
+      {% if mensajes %}
+        <div class="flash-stack">
+          {% for categoria, mensaje in mensajes %}
+            <div class="flash-message {{ 'flash-error' if categoria == 'error' else 'flash-success' }}">
+              {{ mensaje }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    {% block contenido %}{% endblock %}
+  </main>
+
+  {% block scripts %}{% endblock %}
+</body>
+</html>

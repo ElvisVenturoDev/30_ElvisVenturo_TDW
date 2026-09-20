@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block titulo %}Avatares generados{% endblock %}
+
+{% block contenido %}
+  <section class="panel panel--wide">
+    <div class="section-header">
+      <div>
+        <p class="eyebrow">Colección</p>
+        <h2>Avatares generados</h2>
+      </div>
+      <a href="{{ url_for('avatares.nuevo') }}" class="primary-button">
+        + Generar nuevo avatar
+      </a>
+    </div>
+
+    {% if avatares %}
+      <div class="avatar-grid">
+        {% for a in avatares %}
+          <article class="avatar-card">
+            <div class="avatar-frame">
+              <img src="{{ url_for('static', filename='img/processed/' ~ a.archivo_procesado) }}"
+                   alt="Avatar de {{ a.nombre }}"
+                   class="avatar-image">
+            </div>
+            <div class="avatar-meta">
+              <h3>{{ a.nombre }}</h3>
+              <p>{{ a.email }}</p>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="empty-state">
+        <p>Aún no se ha generado ningún avatar.</p>
+      </div>
+    {% endif %}
+  </section>
+{% endblock %}
