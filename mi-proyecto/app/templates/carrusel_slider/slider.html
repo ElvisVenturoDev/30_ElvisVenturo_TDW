@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block titulo %} Slider Interactivo {% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/slider.css') }}">
+{% endblock %}
+
+{% block contenido %}
+<div class="text-center mb-8">
+    <h2 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">Slider de Galería Pro</h2>
+    <p class="mt-2 text-slate-400">Implementación personalizada con animaciones suaves y controles dinámicos.</p>
+</div>
+
+<!-- Contenedor Principal del Slider -->
+<div id="custom-slider" class="relative w-full max-w-4xl mx-auto overflow-hidden rounded-2xl shadow-2xl bg-slate-800 border border-slate-700">
+    
+    <!-- Slides Container -->
+    <div class="slider-wrapper flex transition-transform duration-700 ease-in-out" id="sliderWrapper">
+        {% for img in imagenes %}
+        <div class="slider-item min-w-full relative h-[420px] flex-shrink-0">
+            <img src="{{ url_for('static', filename=img.url) }}" alt="{{ img.titulo }}" class="w-full h-full object-cover">
+            <!-- Capa sobrepuesta con texto -->
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent flex flex-col justify-end p-8">
+                <h3 class="text-2xl font-bold text-white mb-1 drop-shadow-md">{{ img.titulo }}</h3>
+                <p class="text-slate-300 text-sm max-w-md drop-shadow">{{ img.desc }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Botón Anterior -->
+    <button id="prevSlideBtn" class="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 flex items-center justify-center rounded-full bg-slate-900/60 hover:bg-cyan-500 text-white backdrop-blur-md transition-all duration-300 shadow-lg group">
+        <svg class="w-6 h-6 transform group-hover:-translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+    </button>
+
+    <!-- Botón Siguiente -->
+    <button id="nextSlideBtn" class="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 flex items-center justify-center rounded-full bg-slate-900/60 hover:bg-cyan-500 text-white backdrop-blur-md transition-all duration-300 shadow-lg group">
+        <svg class="w-6 h-6 transform group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+    </button>
+
+    <!-- Indicadores de Puntos -->
+    <div id="dotsContainer" class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-10">
+        {% for img in imagenes %}
+        <button class="dot-btn w-3 h-3 rounded-full bg-white/40 hover:bg-white transition-all duration-300" data-index="{{ loop.index0 }}"></button>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/slider.js') }}"></script>
+{% endblock %}

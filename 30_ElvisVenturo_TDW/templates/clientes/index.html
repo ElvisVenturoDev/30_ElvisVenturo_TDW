@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio - Página Interactiva{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-100">
+    <!-- Header -->
+    <header class="bg-blue-600 text-white py-6 shadow-lg">
+        <div class="max-w-4xl mx-auto px-4">
+            <h1 class="text-3xl font-bold">Página Interactiva</h1>
+            <p class="text-blue-100 mt-1">Flask + Tailwind CSS + JavaScript</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 py-8">
+        <!-- Section 1: Mostrar Mensaje -->
+        <section class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">1. Mostrar Mensaje</h2>
+            <button 
+                onclick="mostrarMensaje()" 
+                class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-6 rounded transition duration-200">
+                Mostrar Mensaje
+            </button>
+            <div id="mensaje" class="mt-4 hidden">
+                <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded">
+                    <p class="text-gray-800">¡Hola! Este es un mensaje que aparece al hacer clic en el botón.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Cambiar Contenido -->
+        <section class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">2. Cambiar Contenido</h2>
+            <div class="flex gap-2 mb-4">
+                <input 
+                    type="text" 
+                    id="inputContenido" 
+                    placeholder="Ingresa nuevo contenido..."
+                    class="input-field flex-grow">
+                <button 
+                    onclick="agregarContenido()" 
+                    class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-6 rounded transition duration-200">
+                    Agregar
+                </button>
+            </div>
+            <button 
+                onclick="cambiarContenido()" 
+                class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-6 rounded transition duration-200 mb-3">
+                Cambiar Contenido
+            </button>
+            <div id="contenido" class="mt-4 bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded">
+                <p class="text-gray-700">Tercer contenido 📝</p>
+            </div>
+        </section>
+
+        <!-- Section 3: Modificar Estilo -->
+        <section class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">3. Modificar Estilo</h2>
+            <button 
+                onclick="cambiarEstilo()" 
+                class="bg-purple-500 hover:bg-purple-600 text-white font-semibold py-2 px-6 rounded transition duration-200">
+                Cambiar Estilo
+            </button>
+            <div id="estilo" class="mt-4 bg-green-100 border-l-4 border-green-500 p-4 rounded">
+                <p class="text-gray-700">Esta caja cambia de estilo</p>
+            </div>
+        </section>
+
+        <!-- Output Console -->
+        <section class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">📊 Output / Consola</h2>
+            <div id="output">
+                <p>>> Sistema listo...</p>
+            </div>
+            <button 
+                onclick="limpiarConsola()" 
+                class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded transition duration-200 mt-3">
+                Limpiar Consola
+            </button>
+        </section>
+    </main>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}

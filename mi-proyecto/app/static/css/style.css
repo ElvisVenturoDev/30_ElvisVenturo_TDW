@@ -1,0 +1,10 @@
+/* Ajustes específicos para el Slider */
+.slider-wrapper {
+    will-change: transform;
+}
+
+.dot-btn.active-dot {
+    background-color: #06b6d4 !important; /* cyan-500 */
+    width: 1.75rem !important; /* Estilo de píldora alargada para la diapositiva activa */
+    border-radius: 9999px;
+}
